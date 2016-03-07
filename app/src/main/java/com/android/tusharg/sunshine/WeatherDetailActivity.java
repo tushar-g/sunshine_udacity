@@ -4,8 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,6 +26,8 @@ public class WeatherDetailActivity extends AppCompatActivity {
     @Bind(R.id.tv_forecastDetail)
     TextView tv_forecastDetail;
 
+    String forcastArray;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +37,7 @@ public class WeatherDetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        String forcastArray = getIntent().getStringExtra(AppConstants.INTENT_WEATHER_DETAIL_SEND_WEATHERDATA);
+        forcastArray = getIntent().getStringExtra(AppConstants.INTENT_WEATHER_DETAIL_SEND_WEATHERDATA);
         if ((getIntent() != null) && (forcastArray != null)) {
             tv_forecastDetail.setText(forcastArray);
         }
@@ -41,7 +46,7 @@ public class WeatherDetailActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.detail, menu);
         return true;
     }
 
@@ -57,6 +62,18 @@ public class WeatherDetailActivity extends AppCompatActivity {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
             return true;
+        } else if (id == R.id.action_share) {
+            Intent intent = new Intent();
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+            intent.setAction(Intent.ACTION_SEND);
+            intent.setType("text/plain");
+            intent.putExtra(Intent.EXTRA_TEXT, forcastArray + "#Sunshine APP");
+            ShareActionProvider shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
+            if (shareActionProvider != null) {
+                shareActionProvider.setShareIntent(intent);
+            } else {
+                Log.d("", "No Share Action provider");
+            }
         }
 
         return super.onOptionsItemSelected(item);

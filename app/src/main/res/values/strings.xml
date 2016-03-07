@@ -12,4 +12,5 @@
     <string name="temp_pref_summary">Choose Units</string>
     <string name="temp_pref_title">Temprature Units</string>
     <string name="temp_pref_default_val">metric</string>
+    <string name="action_map">View On Map</string>
 </resources>
