@@ -6,20 +6,36 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.android.tusharg.sunshine.Activity.SettingsActivity;
 
-public class MainActivity extends AppCompatActivity {
+import org.w3c.dom.Text;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
+public class WeatherDetailActivity extends AppCompatActivity {
+
+    @Bind(R.id.tv_forecastDetail)
+    TextView tv_forecastDetail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_weather_detail);
+        ButterKnife.bind(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        String forcastArray = getIntent().getStringExtra(AppConstants.INTENT_WEATHER_DETAIL_SEND_WEATHERDATA);
+        if ((getIntent() != null) && (forcastArray != null)) {
+            tv_forecastDetail.setText(forcastArray);
+        }
     }
 
     @Override

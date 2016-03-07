@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">SunShine</string>
     <string name="action_settings">Settings</string>
+    <string name="action_refresh">Refresh</string>
+    <string name="title_activity_weather_detail">Weather Detail</string>
+    <string name="location_pref">PREF_LOCATION</string>
+    <string name="location_pref_default_val">110053</string>
+    <string name="location_pref_title">Location</string>
+    <string name="location_pref_summary">Please enter the pincode</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="temp_pref">PREF_TEMPERATURE_UNITS</string>
+    <string name="temp_pref_summary">Choose Units</string>
+    <string name="temp_pref_title">Temprature Units</string>
+    <string name="temp_pref_default_val">metric</string>
 </resources>
